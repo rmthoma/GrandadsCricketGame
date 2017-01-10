@@ -1,5 +1,5 @@
 var diceX, diceY, result, totalScore;
-var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw = 0, totalWickets = 0, run1 = 0, run2 = 0, run3 = 0, run4 = 0, run6 = 0, nb = 0;
+var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw = 0, caught = 0, totalWickets = 0, run1 = 0, run2 = 0, run3 = 0, run4 = 0, run6 = 0, nb = 0, wd = 0;
 
 		function RollDice() {
 			console.log(ballsRemaining + " balls remaining");
@@ -15,6 +15,10 @@ var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw 
 				result = resultTable[diceX][diceY];
 			} else {
 				console.log("A value has not been entered yet");
+			}
+
+			if (resultTable[diceX][diceY] == "NB" || resultTable[diceX][diceY] == "WD") {
+				ballsRemaining++;
 			}
 
 			if (ballsRemaining > 1) {
@@ -42,6 +46,10 @@ var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw 
 				        wickets++;
 				        totalWickets++;
 				        break;
+				    case "C":
+				        caught++;
+				        totalWickets++;
+				        break;
 				    case "LBW":
 				        lbw++;
 				        totalWickets++;
@@ -64,6 +72,9 @@ var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw 
 				    case "NB":
 				        nb++;
 				        break;
+				    case "WD":
+				        wd++;
+				        break;
 				    default:
 				        console.log("default case");
 				}
@@ -71,7 +82,7 @@ var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw 
 		}
 
 		function CalculateScore() {
-			totalScore = (1 * run1) + (2 * run2) + (3 * run3) + (4 * run4) + (6 * run6) + (1 * nb);
+			totalScore = (1 * run1) + (2 * run2) + (3 * run3) + (4 * run4) + (6 * run6) + (1 * nb) + (1 * wd);
 		}
 
 		//RollDice();
@@ -84,11 +95,13 @@ var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw 
 		console.log("Total Balls: " + balls)
 		console.log("Dot balls: " + dot);
 		console.log("Wickets: " + wickets);
+		console.log("Caught: " + caught);
 		console.log("LBW: " + lbw);
 		console.log("1's: " + run1);
 		console.log("2's: " + run2);
 		console.log("3's: " + run3);
 		console.log("4's: " + run4);
 		console.log("6's: " + run6);
+		console.log("Wides: " + wd);
 		console.log("No Balls: " + nb);
 		console.log("Total Score: " + totalScore);
