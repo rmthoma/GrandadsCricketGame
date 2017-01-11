@@ -31,6 +31,7 @@ var team1 = team_Australia;
 				team1.teamStatus[batter1][2] = false;
 				team1.teamStatus[batter1][1] = team1.teamStatus[batter1][1] + 1;
 				team1.teamStatus[batter1][3] = false;
+				RecordPartnership();
 
 				for (var i = 0; i < 11; i++) {
 					if (team1.teamStatus[i][2] == true) {
@@ -49,7 +50,7 @@ var team1 = team_Australia;
 				team1.teamStatus[batter2][2] = false;
 				team1.teamStatus[batter2][1] = team1.teamStatus[batter2][1] + 1;
 				team1.teamStatus[batter2][3] = false;
-
+				RecordPartnership();
 
 				for (var i = 0; i < 11; i++) {
 					if (team1.teamStatus[i][2] == true) {
@@ -60,6 +61,13 @@ var team1 = team_Australia;
 				}
 				console.log("The new batter is " + team1.teamStatus[batter2][0]);
 			}
+		}
+
+		//Add batters and partnership score to partership array
+		function RecordPartnership() {
+			team1.partnerships[partnershipCounter][0] = team1.teamStatus[batter1][0];
+			team1.partnerships[partnershipCounter][1] = team1.teamStatus[batter2][0];
+			team1.partnerships[partnershipCounter][2] = partnership;
 		}
 
 		//Each ball it calculates the result from the table. It also adds an extra ball for wides and no balls.
@@ -81,9 +89,10 @@ var team1 = team_Australia;
 				//console.log("OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 				//console.log(partnership);
 				partnerships[partnershipCounter] = partnership;
+				EndOfPartnership();
 				partnership = 0
 				partnershipCounter++;
-				EndOfPartnership();
+				
 			}
 
 			if (ballsRemaining > 1) {

@@ -32,3 +32,17 @@ var team_Australia = new Object();
     ["P. Cummins","0",true, true],
     ["J. Hazlewood","0",true, true]
     ];
+
+    //Batter 1 , Batter 2 , Score
+    team_Australia.partnerships = [
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""],
+    ["","",""]
+    ]
