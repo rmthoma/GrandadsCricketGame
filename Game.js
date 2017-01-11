@@ -1,10 +1,11 @@
 //Declares all global variables
 var diceX, diceY, result, totalScore;
 var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw = 0, caught = 0, totalWickets = 0, 
-	run1 = 0, run2 = 0, run3 = 0, run4 = 0, run6 = 0, nb = 0, wd = 0, partnership = 0, partnershipCounter = 0;
+	run1 = 0, run2 = 0, run3 = 0, run4 = 0, run6 = 0, nb = 0, wd = 0, partnership = 0, partnershipCounter = 0, overs = 0;
 var partnerships = [];
 var batter1 = 0, batter2 = 1;
 var team1 = team_Australia;
+var currentBatter = batter1;
 
 		//Displayed at the start of the game showing the teams and initial batsmen
 		function FirstMessages() {
@@ -70,6 +71,25 @@ var team1 = team_Australia;
 			team1.partnerships[partnershipCounter][2] = partnership;
 		}
 
+		function WhoIsBatting() {
+			if (result == "1" || result == "3") {
+				currentBatter = batter2;
+			}
+			else {
+				currentBatter = batter1;
+			}
+			
+		}
+
+		function ChangeBatter() {
+			if (currentBatter == batter1) {
+				currentBatter = batter2;
+			}
+			else if (currentBatter == batter2) {
+				currentBatter = batter1;
+			}
+		}
+
 		//Each ball it calculates the result from the table. It also adds an extra ball for wides and no balls.
 		//It also keeps track of how many balls have been bowled (total balls that over and balls remaining).
 		//It also keeps track of partnerships and stores each partnership total in partnerships array after out.
@@ -102,6 +122,10 @@ var team1 = team_Australia;
 			else if (ballsRemaining == 1) {
 				ballsThatOver++;
 				console.log("--------------- " + ballsThatOver + " balls that over");
+				overs++;
+				if (result == "." || result == "2" || result == "4" || result == "6") {
+					ChangeBatter();
+				}
 				ballsRemaining = 6;
 				ballsThatOver = 0;
 			}
@@ -175,9 +199,9 @@ var team1 = team_Australia;
 		console.log('\n');
 		TestBalls();
 		CalculateScore();
-		console.log(team1.team)
 
 		console.log('\n');
+		console.log(team1.teamName + " lasted " + overs + " overs.")
 		console.log("Total Balls: " + balls)
 		console.log("Dot balls: " + dot);
 		console.log("Wickets: " + wickets);
