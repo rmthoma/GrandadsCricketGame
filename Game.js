@@ -3,13 +3,15 @@ var diceX, diceY, result, totalScore;
 var balls = 0, ballsRemaining = 6, ballsThatOver = 0, dot = 0, wickets = 0, lbw = 0, caught = 0, totalWickets = 0, 
 	run1 = 0, run2 = 0, run3 = 0, run4 = 0, run6 = 0, nb = 0, wd = 0, partnership = 0, partnershipCounter = 0, overs = 0;
 var partnerships = [];
+var wicketTable = []; //recording them but console.table won't show them. use wicketTable[number]
 var batter1 = 0, batter2 = 1;
 var team1 = team_Australia;
+var team2 = team_NZ;
 var currentBatter = batter1;
 
 		//Displayed at the start of the game showing the teams and initial batsmen
 		function FirstMessages() {
-			console.log("The match is between " + team1.teamName + " and another team");
+			console.log("The match is between " + team1.teamName + " and " + team2.teamName);
 			console.log("The first batsmen out are " + team1.teamStatus[batter1][0] + " and " + team1.teamStatus[batter2][0]);
 		}
 
@@ -32,6 +34,7 @@ var currentBatter = batter1;
 				team1.teamStatus[batter1][2] = false;
 				team1.teamStatus[batter1][1] = team1.teamStatus[batter1][1] + 1;
 				team1.teamStatus[batter1][3] = false;
+				wicketTable[totalWickets - 1] = team1.teamStatus[batter1][0] + " is out " +  result;
 				RecordPartnership();
 
 				for (var i = 0; i < 11; i++) {
@@ -51,6 +54,7 @@ var currentBatter = batter1;
 				team1.teamStatus[batter2][2] = false;
 				team1.teamStatus[batter2][1] = team1.teamStatus[batter2][1] + 1;
 				team1.teamStatus[batter2][3] = false;
+				wicketTable[totalWickets - 1] = team1.teamStatus[batter2][0] + " is out " +  result;
 				RecordPartnership();
 
 				for (var i = 0; i < 11; i++) {
@@ -60,7 +64,12 @@ var currentBatter = batter1;
 						break;
 					}
 				}
-				console.log("The new batter is " + team1.teamStatus[batter2][0]);
+				if (totalWickets < 9) {
+					console.log("The new batter is " + team1.teamStatus[batter2][0]);
+				}
+				else {
+					console.log("All batters are out!");
+				}
 			}
 		}
 
